@@ -6,7 +6,7 @@ require_once "../inc/cabecalho-admin.php";
 
 $usuario = new Usuario;
 $listaUsuarios = $usuario->listar();
-$quantidade = count($listaUsuarios);
+
 
 ?>
 
@@ -15,7 +15,7 @@ $quantidade = count($listaUsuarios);
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 		
 		<h2 class="text-center">
-		Usuários <span class="badge bg-dark"><?=$quantidade?></span>
+		Usuários <span class="badge bg-dark"><?=count($listaUsuarios)?></span>
 		</h2>
 
 		<p class="text-center mt-5">
