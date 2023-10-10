@@ -30,7 +30,7 @@ class Usuario{
 
             $consulta->execute();
 
-        } catch (\Exception $erro) {
+        } catch (Exception $erro) {
             die("Erro ao inserir usuário".$erro->getMessage());
         }
     }
@@ -43,7 +43,7 @@ class Usuario{
             $consulta->execute();
 
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        } catch (\Exception $erro) {
+        } catch (Exception $erro) {
             die("Erro ao listar usuário".$erro->getMessage());
         }
         return $resultado;
