@@ -22,7 +22,7 @@ class Usuario{
         $sql="INSERT INTO usuarios(nome, email, senha, tipo) VALUES (:nome, :email, :senha, :tipo)";
         try {
             $consulta = $this->conexao->prepare($sql);
-            
+
             $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
             $consulta->bindValue(":email", $this->email, PDO::PARAM_STR);
             $consulta->bindValue(":senha", $this->senha, PDO::PARAM_STR);
@@ -40,6 +40,10 @@ class Usuario{
 
 
 
+    //Codificação da senha e comparação de senha
+    public function codificaSenha(string $senha){
+        return password_hash($senha, PASSWORD_DEFAULT);
+    }
 
 
 
@@ -51,7 +55,7 @@ class Usuario{
     }
     public function setId(int $id): void
     {
-        $this->id = $id;
+        $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
     }
 
@@ -63,7 +67,7 @@ class Usuario{
     }
     public function setNome(string $nome): void
     {
-        $this->nome = $nome;
+        $this->nome = filter_var($nome, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
 
@@ -74,7 +78,7 @@ class Usuario{
     }
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
     }
 
 
@@ -85,7 +89,7 @@ class Usuario{
     }
     public function setSenha(string $senha): void
     {
-        $this->senha = $senha;
+        $this->senha = filter_var($senha, FILTER_SANITIZE_SPECIAL_CHARS);;
 
     }
 
@@ -98,7 +102,7 @@ class Usuario{
 
     public function setTipo(string $tipo): void
     {
-        $this->tipo = $tipo;
+        $this->tipo = filter_var($tipo, FILTER_SANITIZE_SPECIAL_CHARS);
 
     }
 
