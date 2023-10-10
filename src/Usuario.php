@@ -35,6 +35,21 @@ class Usuario{
         }
     }
 
+    public function listar():array{
+        $sql = "SELECT id, nome, email, tipo FROM usuarios";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+
+            $consulta->execute();
+
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Exception $erro) {
+            die("Erro ao listar usuário".$erro->getMessage());
+        }
+        return $resultado;
+
+    }
+
 
 
 

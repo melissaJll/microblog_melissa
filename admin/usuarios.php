@@ -1,5 +1,13 @@
-<?php 
+<?php
+
+use Microblog\Usuario;
+
 require_once "../inc/cabecalho-admin.php";
+
+$usuario = new Usuario;
+
+$listaUsuarios = $usuario->listar();
+
 ?>
 
 
@@ -29,24 +37,24 @@ require_once "../inc/cabecalho-admin.php";
 				</thead>
 
 				<tbody>
-
-					<tr>
-						<td> Nome... </td>
-						<td> E-mail... </td>
-						<td> Tipo... </td>
-						<td class="text-center">
-							<a class="btn btn-warning" 
-							href="usuario-atualiza.php">
-							<i class="bi bi-pencil"></i> Atualizar
-							</a>
-						
-							<a class="btn btn-danger excluir" 
-							href="usuario-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
-							</a>
-						</td>
-					</tr>
-
+					<?php foreach($listaUsuarios as $itemUsuario){?>
+						<tr>
+							<td><?=$itemUsuario["nome"]?></td>
+							<td> <?=$itemUsuario["email"]?></td>
+							<td> <?=$itemUsuario["tipo"]?></td>
+							<td class="text-center">
+								<a class="btn btn-warning" 
+								href="usuario-atualiza.php?id=<?=$itemUsuario["id"]?>">
+								<i class="bi bi-pencil"></i> Atualizar
+								</a>
+							
+								<a class="btn btn-danger excluir" 
+								href="usuario-exclui.php?id=<?=$itemUsuario["id"]?>">
+								<i class="bi bi-trash"></i> Excluir
+								</a>
+							</td>
+						</tr>
+					<?php }?>	
 				</tbody>                
 			</table>
 	</div>
