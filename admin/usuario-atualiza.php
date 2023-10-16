@@ -3,17 +3,27 @@
 use Microblog\Usuario;
 
 require_once "../inc/cabecalho-admin.php";
-
+//Script de vizualização
 $usuario = new Usuario;
 $usuario->setId($_GET["id"]);
 $umUsuario = $usuario->listarUm();
 $listaUsuarios = $usuario->listar();
 
-
+//Script de atualização
 if(isset($_POST['atualizar'])){
     $usuario->setNome($_POST['nome']);
     $usuario->setEmail($_POST['email']);
     $usuario->setTipo($_POST['tipo']);
+
+	/* Algoritmo geral para tratamento de senha */
+	/* Se o campo senha no formulário estiver vazio, significa que o usuario não mudou a senha */
+	if(empty($_POS['senha'])){
+		/* Portanto passamos a senha já existente no banco de dados $umUsuario['senha'] para o objeto através do setSenha, sem qualquer alteração */
+		$usuario->setSenha($umUsuario['senha']);
+	}else{ 
+		/*Caso contrário, se o usuario digitou alguma coisa no campo, precisaremos verificar o que foi digitado*/
+
+	}
 
 	$usuario->inserir();
 	header("location:usuarios.php");

@@ -67,6 +67,29 @@ class Usuario{
         return $resultado;
     }
 
+    //update um usuario
+    public function atualizar(){
+        $sql = "UPDATE usuarios SET 
+        nome = :nome,
+        email = :email,
+        tipo = :tipo,
+        senha = :senha,
+        WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->bindValue(":email", $this->email, PDO::PARAM_STR);
+            $consulta->bindValue(":senha", $this->senha, PDO::PARAM_STR);
+            $consulta->bindValue(":tipo", $this->tipo, PDO::PARAM_STR);
+            $consulta->execute();
+
+        } catch (Exception $erro) {
+            die("Erro ao atualizar dados: ".$erro->getMessage());
+        }
+    }
+
 
 
 
@@ -75,6 +98,15 @@ class Usuario{
     //Codificação da senha e comparação de senha
     public function codificaSenha(string $senha){
         return password_hash($senha, PASSWORD_DEFAULT);
+    }
+
+    public function verificaSenha(string $senhaFormulario, string $senhaBanco):string{
+        //                (senha digitada, senha codificada) = if(true ou false)
+        if (password_verify($senhaFormulario, $senhaBanco)) {
+            return $senhaBanco; //retorna a mesma, pois é igual
+        }else{
+            return $this->codificaSenha($senhaFormulario);
+        }
     }
 
 
