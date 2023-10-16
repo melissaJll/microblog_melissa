@@ -35,6 +35,7 @@ class Usuario{
         }
     }
 
+    //Todos os usuarios
     public function listar():array{
         $sql = "SELECT id, nome, email, tipo FROM usuarios";
         try {
@@ -48,6 +49,20 @@ class Usuario{
         }
         return $resultado;
 
+    }
+
+    //Um usuario
+    public function listarUm():array{
+        $sql= "SELECT * FROM usuarios WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id",$this->id,PDO::PARAM_INT);
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $erro) {
+            die("Erro ao carregar usuário".$erro->getMessage());
+        }
+        return $resultado;
     }
 
 
