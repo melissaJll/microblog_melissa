@@ -6,27 +6,29 @@ require_once "../inc/cabecalho-admin.php";
 //Script de vizualização
 $usuario = new Usuario;
 $usuario->setId($_GET["id"]);
-$umUsuario = $usuario->listarUm();
+$umUsuario = $usuario->listarUm(); //Vem do Banco
 $listaUsuarios = $usuario->listar();
 
 //Script de atualização
 if(isset($_POST['atualizar'])){
-    $usuario->setNome($_POST['nome']);
+    $usuario->setNome($_POST['nome']); //Vem do Formulário
     $usuario->setEmail($_POST['email']);
     $usuario->setTipo($_POST['tipo']);
 
 	/* Algoritmo geral para tratamento de senha */
 	/* Se o campo senha no formulário estiver vazio, significa que o usuario não mudou a senha */
-	if(empty($_POS['senha'])){
+	if(empty($_POST['senha'])){ //Caso 1: deixa vazio
 		/* Portanto passamos a senha já existente no banco de dados $umUsuario['senha'] para o objeto através do setSenha, sem qualquer alteração */
 		$usuario->setSenha($umUsuario['senha']);
-	}else{ 
+	}else{ //caso 2 e 3
 		/*Caso contrário, se o usuario digitou alguma coisa no campo, precisaremos verificar o que foi digitado*/
-
+		$usuario->setSenha(
+			$usuario->verificaSenha($_POST['senha'], $umUsuario['senha'])
+		);
 	}
+	echo $usuario->getSenha();
 
-	$usuario->inserir();
-	header("location:usuarios.php");
+	
 }
 ?>
 

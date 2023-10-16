@@ -73,7 +73,7 @@ class Usuario{
         nome = :nome,
         email = :email,
         tipo = :tipo,
-        senha = :senha,
+        senha = :senha
         WHERE id = :id";
 
         try {
@@ -101,12 +101,13 @@ class Usuario{
     }
 
     public function verificaSenha(string $senhaFormulario, string $senhaBanco):string{
-        //                (senha digitada, senha codificada) = if(true ou false)
-        if (password_verify($senhaFormulario, $senhaBanco)) {
+        // (senha digitada, senha codificada) = if(true ou false)
+        //Caso 2: escreve a mesma senha
+        if (password_verify($senhaFormulario, $senhaBanco)) { 
             return $senhaBanco; //retorna a mesma, pois é igual
         }else{
             return $this->codificaSenha($senhaFormulario);
-        }
+        }//Caso 3: senha digitada diferente
     }
 
 
