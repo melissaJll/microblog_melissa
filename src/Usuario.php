@@ -52,16 +52,18 @@ class Usuario{
     }
 
     //Um usuario
-    public function listarUm():array{
-        $sql= "SELECT * FROM usuarios WHERE id = :id";
+    public function listarUm():array {
+        $sql = "SELECT * FROM usuarios WHERE id = :id";
+
         try {
             $consulta = $this->conexao->prepare($sql);
-            $consulta->bindValue(":id",$this->id,PDO::PARAM_INT);
-            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $erro) {
-            die("Erro ao carregar usuário".$erro->getMessage());
+            die("Erro ao carregar dados: ".$erro->getMessage());
         }
+
         return $resultado;
     }
 
