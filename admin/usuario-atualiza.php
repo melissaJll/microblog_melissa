@@ -26,9 +26,9 @@ if(isset($_POST['atualizar'])){
 			$usuario->verificaSenha($_POST['senha'], $umUsuario['senha'])
 		);
 	}
-	echo $usuario->getSenha();
 
-	
+	$usuario->atualizar();
+	header("location:usuarios.php");
 }
 ?>
 
