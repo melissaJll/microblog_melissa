@@ -1,5 +1,11 @@
-<?php require_once "../vendor/autoload.php";
-use Microblog\Usuario;
+<?php 
+use Microblog\ControleDeAcesso;
+require_once "../vendor/autoload.php";
+
+//criando um objeto para acessar os recursos do controle de acesso (ou seja, usar resursos de sessão do PHP)
+$sessao = new ControleDeAcesso;
+//Executando o método verifica se tem alguem logado // aparece form login
+$sessao->verificaAcesso();
 
 ?>
 
