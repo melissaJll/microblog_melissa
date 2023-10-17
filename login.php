@@ -5,6 +5,7 @@ use Microblog\Usuario;
 
 require_once "inc/cabecalho.php";
 
+
 // Mensagens de feedback do login
 if(isset($_GET["campos_obrigatorios"]) ){
 	$feedback = "Você deve logar primeiro";
@@ -43,7 +44,18 @@ if(isset($_GET["campos_obrigatorios"]) ){
 				if (empty($_POST['email']) || empty($_POST['senha']) ) {
 					header("location:login.php?campos_obrigatorios");
 				} else {
-					echo "Ok, você pode logar";
+					//Capturar email
+					$usuario = new Usuario;
+					$usuario->setEmail($_POST["email"]);
+
+					//Buscar o email no banco de dados
+
+					//Se não existir o email, continuará em login.php
+
+					//Se existir
+						//verificar a senha
+						// se estiver correta, iniciar processo de login
+						//Não está corretta, constinuará em login
 				}
 				
 			}

@@ -104,6 +104,19 @@ class Usuario{
     }
 
 
+    public function buscar():array | bool{ //funciona no phph 7.4 ou tirar e deixar vazio
+        $sql = "SELECT * FROM usuarios Where email = :email";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":email", $this->email, PDO::PARAM_STR);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        } catch (Exception $erro) {
+            die("Erro ao buscar: ".$erro->getMessage());
+        }
+        return $resultado;
+    }
 
 
 
