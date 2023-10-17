@@ -7,6 +7,10 @@ $sessao = new ControleDeAcesso;
 //Executando o método verifica se tem alguem logado // aparece form login
 $sessao->verificaAcesso();
 
+//Condicionar para occorer apenas ao clicar no logout
+//Que é um link não um botão. Portanto colocamos um parametro na URL para capturar
+if(isset($_GET['sair'])) $sessao->logout();
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +60,7 @@ $sessao->verificaAcesso();
                 <a class="nav-link" href="../index.php" target="_blank">Área pública</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fw-bold" href=""> <i class="bi bi-x-circle"></i> Sair</a>
+                <a class="nav-link fw-bold" href="?sair"> <i class="bi bi-x-circle"></i> Sair</a>
             </li>
         </ul>
 
