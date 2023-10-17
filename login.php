@@ -10,6 +10,8 @@ require_once "inc/cabecalho.php";
 // Mensagens de feedback do login
 if(isset($_GET["campos_obrigatorios"]) ){
 	$feedback = "Você deve preecher email e senha!";
+}elseif(isset($_GET["dados_incorretos"])){
+	$feedback = "Dados Incorretos";
 }
 
 ?>
@@ -51,14 +53,24 @@ if(isset($_GET["campos_obrigatorios"]) ){
 
 					//Buscar o email no banco de dados
 					$dados = $usuario->buscar();
-					Utilitarios::dump($dados);
 
-					//Se não existir o email, continuará em login.php
-
+					//Se não existir $dados(o email não existir retorna false), continuará em login.php
+					//if($dados === false)
+					if(!$dados){
+						header("location:login.php?dados_incorretos");
+					}else{
 					//Se existir
 						//verificar a senha
 						// se estiver correta, iniciar processo de login
+						if (password_verify($_POST['senha'], $dados['senha'])) {
+							echo "Senha correta";
+						}
 						//Não está corretta, constinuará em login
+						else{
+							echo "Senha Incorreta";				
+						}
+						
+					}
 				}
 				
 			}
