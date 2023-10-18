@@ -1,12 +1,14 @@
 <?php
 
 use Microblog\Usuario;
-use Microblog\Utilitarios;
 
 require_once "../inc/cabecalho-admin.php";
 
 $usuario = new Usuario;
 $listaUsuarios = $usuario->listar();
+//No cabeçalho já foi criado o obj de ControleDeAcesso
+//Se perceber que o tipo não é admin redireciona
+$sessao->verificaAcessoAdmin();
 
 ?>
 

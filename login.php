@@ -25,7 +25,8 @@ if(isset($_GET["campos_obrigatorios"]) ){
     <div class="bg-white rounded shadow col-12 my-1 py-4">
         <h2 class="text-center fw-light">Acesso à área administrativa</h2>
 
-        <form action="" method="post" id="form-login" name="form-login" class="mx-auto w-50">
+		<!-- autocomplete="off" -->
+        <form action="" method="post" id="form-login" name="form-login" class="mx-auto w-50"> 
 
                 <!-- mensagens -->
 				<?php if(isset($feedback)){?>

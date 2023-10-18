@@ -10,12 +10,19 @@ final class ControleDeAcesso{
     }
 
     public function verificaAcesso():void{
-        //Se não existir uma variável de sessão chamada 'id' (ussuario ainda não fez login)
+        //Se não existir uma variável de sessão chamada 'id' (ussuario ainda não fez login) (se está logado)
         if (!isset($_SESSION['id'])){
             // ... então destrua qualquer resquicio de sessão, redirecione para login, e pare completamente o script
             session_destroy();
             header("location:../login.php?acesso_proibido");
             die();//exit
+        }
+    }
+
+    public function verificaAcessoAdmin():void{
+        if ($_SESSION["tipo"] !== "admin") {
+            header("location:nao-autorizado.php");
+            die();
         }
     }
 
