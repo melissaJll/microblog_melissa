@@ -1,5 +1,18 @@
-<?php 
-require_once "../inc/cabecalho-admin.php";
+<?php
+
+use Microblog\Categoria;
+
+require_once "../inc/cabecalho-admin.php"; //Já foi criado o objeto de ControledeAcesso 
+// $sessao->verificaAcesso(); Já está em cabeçalho
+$sessao->verificaAcessoAdmin();
+
+if(isset($_POST['inserir'])){
+	$categoria = new Categoria;
+	$categoria->setNome($_POST['nome']);
+
+	$categoria->inserir();
+	header("location:categorias.php");
+}
 ?>
 
 

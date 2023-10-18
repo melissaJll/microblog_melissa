@@ -13,7 +13,18 @@ class Categoria{
     }
 
 
+    public function inserir():void{
+        try {
+            $sql = "INSERT INTO categorias(nome) VALUES (:nome)";
 
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR_CHAR);
+            $consulta->execute();
+
+        } catch (Exception $erro) {
+            die("Erro ao inserir usuário".$erro->getMessage());
+        }
+    }
 
 
 
