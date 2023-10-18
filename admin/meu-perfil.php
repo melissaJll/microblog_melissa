@@ -1,5 +1,13 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+
+Use Microblog\Usuario;
+use Microblog\Utilitarios;
+
+$usuario = new Usuario;
+//Atribuimos ao objeto o id do usuario logado na sessão
+$usuario->setId($_SESSION["id"]);
+$umUsuario = $usuario->listarUm(); //Os dados são trazidos do banco pela função
 ?>
 
 
@@ -10,16 +18,16 @@ require_once "../inc/cabecalho-admin.php";
 		Atualizar meus dados
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-atualizar" name="form-atualizar">
+		<form class=" mx-auto w-75" action="" method="post" id="form-atualizar" name="form-atualizar">
 
 			<div class="mb-3">
 				<label class="form-label" for="nome">Nome:</label>
-				<input class="form-control" type="text" id="nome" name="nome" required>
+				<input value="<?=$umUsuario['nome']?>" class="form-control" type="text" id="nome" name="nome" required>
 			</div>
 
 			<div class="mb-3">
 				<label class="form-label" for="email">E-mail:</label>
-				<input class="form-control" type="email" id="email" name="email" required>
+				<input value="<?=$umUsuario['email']?>" class="form-control" type="email" id="email" name="email" required>
 			</div>
 
 			<div class="mb-3">
