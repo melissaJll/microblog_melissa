@@ -40,12 +40,12 @@ $todasCategorias = $categoria->listar();
 							<td> <?=$umaCategoria['nome']?> </td>
 							<td class="text-center">
 								<a class="btn btn-warning"
-								href="categoria-atualiza.php">
+								href="categoria-atualiza.php?id=<?=$umaCategoria["id"]?>">
 								<i class="bi bi-pencil"></i> Atualizar
 								</a>
 						
 								<a class="btn btn-danger excluir"
-								href="categoria-exclui.php">
+								href="categoria-exclui.php?id=<?=$umaCategoria["id"]?>">
 								<i class="bi bi-trash"></i> Excluir
 								</a>
 							</td>

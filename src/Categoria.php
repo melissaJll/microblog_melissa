@@ -32,12 +32,46 @@ class Categoria{
             $consulta = $this->conexao->prepare($sql);
             $consulta->execute();
 
-            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);//matriz
 
         } catch (Exception $erro) {
             die("Erro ao listar categorias".$erro->getMessage());
         }
         return $resultado;
+    }
+
+    public function listarUm():array {
+        $sql = "SELECT * FROM categorias WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);//vetor
+
+        } catch (Exception $erro) {
+            die("Erro ao carregar dados da categoria: ".$erro->getMessage());
+        }
+
+        return $resultado;
+    }
+
+    public function atualizar(){
+        $sql = "UPDATE categorias SET 
+        nome = :nome
+        WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->execute();
+
+        } catch (Exception $erro) {
+            die("Erro ao atualizar dados: ".$erro->getMessage());
+        }
     }
 
 
