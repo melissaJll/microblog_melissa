@@ -1,5 +1,12 @@
-<?php 
+<?php
+
+use Microblog\Categoria;
+
 require_once "../inc/cabecalho-admin.php";
+$sessao->verificaAcessoAdmin();
+
+$categoria = new Categoria;
+$todasCategorias = $categoria->listar();
 ?>
 
 
@@ -28,20 +35,22 @@ require_once "../inc/cabecalho-admin.php";
 
 				<tbody>
 
-					<tr>
-						<td> Nome... </td>
-						<td class="text-center">
-							<a class="btn btn-warning" 
-							href="categoria-atualiza.php">
-							<i class="bi bi-pencil"></i> Atualizar
-							</a>
+					<?php foreach($todasCategorias as $umaCategoria){?>
+						<tr>
+							<td> <?=$umaCategoria['nome']?> </td>
+							<td class="text-center">
+								<a class="btn btn-warning"
+								href="categoria-atualiza.php">
+								<i class="bi bi-pencil"></i> Atualizar
+								</a>
 						
-							<a class="btn btn-danger excluir" 
-							href="categoria-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
-							</a>
-						</td>
-					</tr>
+								<a class="btn btn-danger excluir"
+								href="categoria-exclui.php">
+								<i class="bi bi-trash"></i> Excluir
+								</a>
+							</td>
+						</tr>
+					<?php }?>
 
 				</tbody>                
 			</table>

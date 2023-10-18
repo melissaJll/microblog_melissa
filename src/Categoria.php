@@ -26,7 +26,19 @@ class Categoria{
         }
     }
 
+    public function listar():array{
+        $sql = "SELECT * FROM categorias";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->execute();
 
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $erro) {
+            die("Erro ao listar categorias".$erro->getMessage());
+        }
+        return $resultado;
+    }
 
 
 
