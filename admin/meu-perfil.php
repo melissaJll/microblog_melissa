@@ -8,6 +8,22 @@ $usuario = new Usuario;
 //Atribuimos ao objeto o id do usuario logado na sessão
 $usuario->setId($_SESSION["id"]);
 $umUsuario = $usuario->listarUm(); //Os dados são trazidos do banco pela função
+
+if (isset($_POST["atualizar"])) {
+	$usuario->setNome($_POST['nome']);
+	$usuario->setEmail($_POST['email']);
+	$usuario->setTipo($_SESSION["tipo"]);//Mantem o mesmo tipo, pois esse paramtro é necessario para função atualizar
+	if(empty($_POST['senha'])){
+		$usuario->setSenha($umUsuario['senha']);
+	}else{
+		$usuario->setSenha( $usuario->verificaSenha($_POST['senha'], $umUsuario['senha']));
+	}
+
+	$usuario->atualizar();
+	//novo nome será exibido
+	$_SESSION["nome"] = $usuario->getNome();
+	header("location:index.php?perfil-atualizado");
+}
 ?>
 
 
