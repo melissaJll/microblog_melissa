@@ -14,9 +14,9 @@ class Categoria{
 
 
     public function inserir():void{
+        $sql = "INSERT INTO categorias(nome) VALUES (:nome)";
         try {
-            $sql = "INSERT INTO categorias(nome) VALUES (:nome)";
-
+        
             $consulta = $this->conexao->prepare($sql);
             $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR_CHAR);
             $consulta->execute();
@@ -25,6 +25,8 @@ class Categoria{
             die("Erro ao inserir usuário".$erro->getMessage());
         }
     }
+
+
 
 
 
