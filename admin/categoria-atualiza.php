@@ -10,7 +10,7 @@ $categoria = new Categoria;
 $categoria->setId($_GET["id"]);
 
 $umaCategoria = $categoria->listarUm();
-$categorias = $categoria->listar();
+// $categorias = $categoria->listar();
 
 if(isset($_POST['atualizar'])){
     $categoria->setNome($_POST['nome']); //Vem do Formulário
