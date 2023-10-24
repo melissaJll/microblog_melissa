@@ -9,7 +9,7 @@ final class Noticia{
     private string $texto;
     private string $resumo;
     private string $imagem;
-    private string $destque;
+    private string $destaque;
     private string $termo;
 
     // Atributos cujos tipos são associados a classes já existentes. Permitindo usar os recursos das classes
@@ -26,7 +26,31 @@ final class Noticia{
     }
 
 
-    // 
+    // CRUD
+
+    public function inserir():void{
+        $sql = "INSERT INTO noticias(titulo, texto, resumo, imagem, destaque, usuario_id, categoria_id) 
+        VALUES (:titulo, :texto, :resumo, :imagem, :destaque, :usuario_id, :categoria_id)";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+
+            $consulta->bindValue(":titulo", $this->titulo, PDO::PARAM_STR_CHAR);
+            $consulta->bindValue(":texto", $this->texto, PDO::PARAM_STR_CHAR);
+            $consulta->bindValue(":resumo", $this->resumo, PDO::PARAM_STR_CHAR);
+            $consulta->bindValue(":imagem", $this->imagem, PDO::PARAM_STR_CHAR);
+            $consulta->bindValue(":destaque", $this->destaque, PDO::PARAM_STR_CHAR);
+
+
+            // Devido a associação entre as classes podemos chamar o método getId de Usuario e Categoria para depois associar os valores aos parametro da consulta SQL.
+            $consulta->bindValue(":usuario_id", $this->usuario->getId(), PDO::PARAM_INT);
+            $consulta->bindValue(":categoria_id", $this->categoria->getId(), PDO::PARAM_INT);
+
+            $consulta->execute();
+
+        } catch (Exception $erro) {
+            die("Erro ao inserir notícia".$erro->getMessage());
+        }
+    }
 
  
     public function getId(): int
@@ -104,13 +128,13 @@ final class Noticia{
 
     
     
-    public function getDestque(): string
+    public function getDestaque(): string
     {
-        return $this->destque;
+        return $this->destaque;
     }
-    public function setDestque(string $destque): void
+    public function setDestaque(string $destaque): void
     {
-        $this->destque =  filter_var($destque, FILTER_SANITIZE_SPECIAL_CHARS);
+        $this->destaque =  filter_var($destaque, FILTER_SANITIZE_SPECIAL_CHARS);
 
     }
 
