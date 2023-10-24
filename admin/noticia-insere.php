@@ -22,6 +22,8 @@ if (isset($_POST["inserir"])){
 	/* Sobre a imagem 
 	- Capturar o arquivo de imagem e enviar para o servidor
 	-capturar nome/extensão e enviar para o bannco de dados*/
+	$imagem = $_FILES["imagem"];
+	Utilitarios::dump($imagem);
 }
 
 ?>
