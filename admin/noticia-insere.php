@@ -19,8 +19,6 @@ if (isset($_POST["inserir"])){
 	//id categoria
 	$noticia->categoria->setId($_POST['categoria']); //Categoria selecionada no formulário
 
-	Utilitarios::dump($noticia);
-
 	/* Sobre a imagem 
 	- Capturar o arquivo de imagem e enviar para o servidor
 	-capturar nome/extensão e enviar para o bannco de dados*/
@@ -36,7 +34,7 @@ if (isset($_POST["inserir"])){
 		Inserir nova notícia
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">
+		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label" for="categoria">Categoria:</label>
