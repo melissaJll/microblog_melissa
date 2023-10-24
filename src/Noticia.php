@@ -52,6 +52,41 @@ final class Noticia{
         }
     }
 
+
+
+    // Imagem retorna array com type[] name[] path[] ["tmp_name"]=>...
+    public function upload(array $arquivo): void{
+        //Definindo tipos válidos
+        $tiposValidos = ["image/png", "image/jpeg", "image/gif", "image/svg+xml"];
+        //Verificando se o arquivo NÃO é um dos  tipos válidos com uma função
+        if (!in_array($arquivo["type"], $tiposValidos)) {
+            // alerta usuario e volta para o form
+            die("
+            <script> 
+                alert('formato inválido');
+                history.back();
+            </script>
+            ");
+        }
+
+
+        //Acessando apenas o nome/extensão do arquivo
+        $nome = $arquivo["name"];
+
+        // Acessando os dados de acesso/armazenamento temporários
+        $temporario = $arquivo["tmp_name"];
+
+        //Definindo a pasta de destino(definitiva) das imagens no site
+        
+        $pastaFinal = "../imagens/".$nome;
+
+        // Usamos a função para mover da area temporária até a final
+        //coloca na pasta imagens
+        move_uploaded_file($temporario, $pastaFinal);
+
+    }
+
+
  
     public function getId(): int
     {
