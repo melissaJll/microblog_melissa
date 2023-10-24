@@ -25,6 +25,9 @@ final class Noticia{
         $this->conexao = Banco::conecta();
     }
 
+
+    // 
+
  
     public function getId(): int
     {
