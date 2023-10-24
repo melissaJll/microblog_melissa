@@ -7,6 +7,25 @@ $noticia = new Noticia;
 
 $listaCategorias = $noticia->categoria->listar();
 
+if (isset($_POST["inserir"])){
+	$noticia->setTitulo($_POST["titulo"]);
+	$noticia->setTexto($_POST["texto"]);
+	$noticia->setResumo($_POST["resumo"]);
+	$noticia->setDestaque($_POST["destaque"]);
+
+	//Id usuario
+	$noticia->usuario->setId($_SESSION["id"]); //Ao logar foram criadas as variaveis de sessão e este usuario criou a categoria
+
+	//id categoria
+	$noticia->categoria->setId($_POST['categoria']); //Categoria selecionada no formulário
+
+	Utilitarios::dump($noticia);
+
+	/* Sobre a imagem 
+	- Capturar o arquivo de imagem e enviar para o servidor
+	-capturar nome/extensão e enviar para o bannco de dados*/
+}
+
 ?>
 
 
@@ -21,7 +40,7 @@ $listaCategorias = $noticia->categoria->listar();
 
             <div class="mb-3">
                 <label class="form-label" for="categoria">Categoria:</label>
-                <select class="form-select" name="categoria" id="categoria" required>
+                <select class="form-select" name="categoria" id="categoria" required> <!-- POST categoria -->
 					<option value=""></option>
 					<?php foreach($listaCategorias as $umaCategoria){?>
 						<option value="<?=$umaCategoria['id']?>"> <?=$umaCategoria['nome']?> </option>
