@@ -1,5 +1,12 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+
+use Microblog\Noticia;
+$noticia = new Noticia;
+
+// capturando o id e tipo do usuer logado
+$noticia->usuario->setId($_SESSION["id"]);
+$noticia->usuario->setId($_SESSION["tipo"]);
 ?>
 
 

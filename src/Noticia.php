@@ -11,10 +11,10 @@ final class Noticia{
     private string $imagem;
     private string $destaque;
     private string $termo;
-
     // Atributos cujos tipos são associados a classes já existentes. Permitindo usar os recursos das classes
     public Usuario $usuario;
     public Categoria $categoria;
+
 
     private PDO $conexao;
 
@@ -52,6 +52,19 @@ final class Noticia{
         }
     }
 
+
+    public function listar():array{
+
+        //Usa o atributo desta(this) tabela (public $usuario)
+        if ($this->usuario->getTipo() === "admin") { // Admin
+            $sql= "SELECT noticias.id, noticias.titulo, noticias.data, noticias.destaque, usuarios.nome as autor FROM noticias INNER JOIN usuarios ON noticias.usuario_id = usuarios.id ORDER BY data desc";
+        
+        } else {  //Editor
+            $sql= "SELECT id, titulo, data, destaque FROM noticias where usuario_id = :usuario_id ORDER BY data desc";
+        }
+
+        
+    }
 
 
     // Imagem retorna array com type[] name[] path[] ["tmp_name"]=>...
