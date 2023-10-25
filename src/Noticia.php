@@ -81,7 +81,33 @@ final class Noticia{
         }
         return $resultado;
 
+    }
+
+    public function listarUm():array{
+        if ($this->usuario->getTipo() === "admin") { // Admin
+            $sql= "SELECT * FROM noticias WHERE id = :id ";
         
+        } else {  //Editor
+            $sql= "SELECT * FROM noticias WHERE id = :id AND usuario_id = :usuario_id";
+        }
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            if( $this->usuario->getTipo() !== "admin" ){
+                $consulta->bindValue(
+                    ":usuario_id", $this->usuario->getId(), PDO::PARAM_INT
+                );
+            }
+            $consulta->execute();
+
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            
+        } catch (Exception $erro) {
+            die("Erro ao lista uma noticias".$erro->getMessage());
+        } 
+        return $resultado;
     }
 
 
