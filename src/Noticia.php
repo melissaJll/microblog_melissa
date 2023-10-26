@@ -232,6 +232,20 @@ final class Noticia{
         return $resultado;
 
     }
+    public function listarTodas(){
+        $sql = "SELECT id, data, titulo, resumo FROM noticias ORDER BY data DESC";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->execute();
+
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $erro) {
+            die("Erro ao mostrar notícia em destaque: " . $erro->getMessage());
+        }
+        return $resultado;
+    }
 
 
  

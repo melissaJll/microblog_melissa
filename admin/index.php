@@ -36,7 +36,7 @@ require_once "../inc/cabecalho-admin.php";
 </article>
 
 
-<?php 
+<?php
 require_once "../inc/rodape-admin.php";
 ?>
 
