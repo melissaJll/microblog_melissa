@@ -18,8 +18,8 @@ $dadosNoticia = $noticia->listarDetalhes();
         <p class="font-weight-light">
             <time><?=$dadosNoticia['data']?></time> - <span><?=$dadosNoticia['autor']?></span>
         </p>
-        <img src="imagens/<?=$dadosNoticia['imagem']?>" alt="" class="float-left pr-2 img-fluid">
-        <p><?=$dadosNoticia['texto']?></p>
+        <img src="imagens/<?=$dadosNoticia['imagem']?>" alt="" class="float-start pe-2 img-fluid">
+        <p class="ajusta-texto"><?=$dadosNoticia['texto']?></p>
     </article>
     
 
