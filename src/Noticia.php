@@ -213,6 +213,27 @@ final class Noticia{
     }
 
 
+
+    // ======= Área pública ========
+    //index.php
+    public function listarDestaque():array{
+        //id funciona como no botão atua/exc o id da noticia fica na URL
+        $sql = "SELECT id, titulo, imagem, resumo FROM noticias WHERE destaque = :destaque  ORDER BY data DESC";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":destaque", $this->destaque, PDO::PARAM_STR);
+            $consulta->execute();
+
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $erro) {
+            die("Erro ao mostrar notícia em destaque: " . $erro->getMessage());
+        }
+        return $resultado;
+
+    }
+
+
  
     public function getId(): int
     {
