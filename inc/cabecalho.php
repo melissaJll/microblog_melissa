@@ -4,7 +4,7 @@ require_once "vendor/autoload.php";
 use Microblog\Noticia;
 
 $noticia = new Noticia;
-
+$listaCategorias = $noticia->categoria->listar();
 ?>
 
 
@@ -43,9 +43,9 @@ $noticia = new Noticia;
             Categorias
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Ciência</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Educação</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Tecnologia</a></li>
+          <?php foreach($listaCategorias as $itemCategoria){?>
+            <li><a class="dropdown-item" href="noticias-por-categoria.php?id=<?=$itemCategoria['id']?>"><?=$itemCategoria['nome']?></a></li>
+            <?php } ?>
           </ul>
         </li>
         <li class="nav-item">
