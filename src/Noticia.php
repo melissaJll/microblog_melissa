@@ -218,6 +218,7 @@ final class Noticia{
     //index.php
     public function listarDestaque():array{
         //id funciona como no botão atua/exc o id da noticia fica na URL
+        //cards de noticias
         $sql = "SELECT id, titulo, imagem, resumo FROM noticias WHERE destaque = :destaque  ORDER BY data DESC";
         try {
             $consulta = $this->conexao->prepare($sql);
@@ -232,6 +233,7 @@ final class Noticia{
         return $resultado;
 
     }
+    //lista de noticias
     public function listarTodas(){
         $sql = "SELECT id, data, titulo, resumo FROM noticias ORDER BY data DESC";
 
@@ -242,9 +244,28 @@ final class Noticia{
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (Exception $erro) {
-            die("Erro ao mostrar notícia em destaque: " . $erro->getMessage());
+            die("Erro ao mostrar todas as notícia: " . $erro->getMessage());
         }
         return $resultado;
+    }
+
+    //noticia individual
+    public function listarDetalhes():array{
+        $sql = "SELECT noticias.id, noticias.data, noticias.titulo, noticias.texto, noticias.imagem, usuarios.nome as autor, noticias.imagem 
+        FROM noticias INNER JOIN usuarios
+         ON noticias.usuario_id = usuarios.id WHERE noticias.id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro ao mostrar detalhes da notícia: " . $erro->getMessage());
+        }
+        return $resultado;
+
     }
 
 
