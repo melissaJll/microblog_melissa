@@ -9,5 +9,10 @@ abstract class Utilitarios{
         echo"</pre>";
 
     }
+
+
+    public static function formataData(string $data):string {
+        return date("d/m/Y H:i", strtotime($data));
+    }
 }
 ?>

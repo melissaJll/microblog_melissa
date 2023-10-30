@@ -14,8 +14,11 @@ $todasNoticias = $noticia->listarTodas();
                     <?php foreach($todasNoticias as $umaNoticia){ ?>
                         <a href="noticia.php?id=<?=$umaNoticia['id']?>" class="list-group-item list-group-item-action">
                             <h3 class="fs-6">
-                              <time><?=$umaNoticia['data']?></time> - <?=$umaNoticia['titulo']?>
-                            </h3>
+                            <time>
+                                <?=Utilitarios::formataData($itemNoticia['data'])?>
+                            </time>
+
+                            - <?=$itemNoticia['titulo']?></h3>
                             <p><?=$umaNoticia['resumo']?></p>
                         </a>
                     <?php } ?> 
