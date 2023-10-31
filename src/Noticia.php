@@ -314,7 +314,8 @@ final class Noticia{
         return $resultado;
     }
 
-    
+
+
 
 
  
@@ -411,7 +412,7 @@ final class Noticia{
     }
     public function setTermo(string $termo): void
     {
-        $this->termo =filter_var( $termo, FILTER_SANITIZE_SPECIAL_CHARS);
+        $this->termo = filter_var( $termo, FILTER_SANITIZE_SPECIAL_CHARS);
 
     }
 

@@ -1,6 +1,7 @@
 <?php
 use Microblog\Noticia;
 use Microblog\Utilitarios;
+
 require_once "vendor/autoload.php";
 $noticia = new Noticia;
 $noticia->setTermo($_POST["busca"]);
@@ -22,3 +23,4 @@ if($quantidade > 0){
     <h2 class="fs-5 text-danger">Sem notícias</h2>
 <?php } ?>
 
+    

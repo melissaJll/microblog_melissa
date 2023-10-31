@@ -1,11 +1,12 @@
-<?php 
+<?php
+
 use Microblog\Utilitarios;
 
 require_once "inc/cabecalho.php";
 $noticia->categoria->setId($_GET["id"]);
 $dados = $noticia->listarPorCategoria();
+// Utilitarios::dump($dados);
 ?>
-
 
 
 <div class="row my-1 mx-md-n1">
@@ -21,7 +22,7 @@ $dados = $noticia->listarPorCategoria();
             <h2 class="alert alert-warning text-center">
                 Não há notícias desta categoria</h2>
         <?php } ?>
-
+        
         <div class="row my-1">
             <div class="col-12 px-md-1">
                 <div class="list-group">
@@ -49,4 +50,3 @@ $dados = $noticia->listarPorCategoria();
 require_once "inc/todas.php";
 require_once "inc/rodape.php";
 ?>
-

@@ -1,15 +1,11 @@
-<?php
+<?php 
 /* Output Buffer (gerenciamento de memória de saída) */
 ob_start();
 require_once "vendor/autoload.php";
-
 use Microblog\Noticia;
-
 $noticia = new Noticia;
-$listaCategorias = $noticia->categoria->listar();
+$listaDeCategorias = $noticia->categoria->listar();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
 <head>
@@ -45,9 +41,14 @@ $listaCategorias = $noticia->categoria->listar();
             Categorias
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <?php foreach($listaCategorias as $itemCategoria){?>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php?id=<?=$itemCategoria['id']?>"><?=$itemCategoria['nome']?></a></li>
-            <?php } ?>
+          <?php foreach($listaDeCategorias as $itemCategoria){?>            
+            <li>
+              <a class="dropdown-item" 
+              href="noticias-por-categoria.php?id=<?=$itemCategoria['id']?>">
+                <?=$itemCategoria['nome']?>
+              </a>
+            </li>
+          <?php } ?>
           </ul>
         </li>
         <li class="nav-item">
@@ -59,7 +60,7 @@ $listaCategorias = $noticia->categoria->listar();
         <form autocomplete="off" class="d-flex" action="resultados.php" method="POST" onsubmit="return false" id="form-busca">
           <input id="campo-busca" name="busca" class="form-control me-2" type="search" placeholder="Pesquise aqui" aria-label="Pesquise aqui">  
         </form>
-
+        
         <div id="resultados" 
         class="mt-3 position-absolute container bg-white shadow-lg p-3 rounded"></div>
       </div>
